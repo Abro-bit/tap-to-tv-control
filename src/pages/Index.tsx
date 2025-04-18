@@ -1,17 +1,45 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tv, Power, VolumeX, Volume2, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Home, Menu, Settings, ArrowLeft, Youtube } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import RemoteButton from "@/components/RemoteButton";
-import DeviceSelector from "@/components/DeviceSelector";
+import { useTVConnection } from "@/hooks/useTVConnection";
+import { useToast } from "@/hooks/use-toast";
 import IOSButton from "@/components/IOSButton";
 import AppIcon from "@/components/AppIcon";
 
 const Index = () => {
   const navigate = useNavigate();
-  const [currentDevice, setCurrentDevice] = useState("Samsung TV");
+  const { toast } = useToast();
+  const { status, connectedDevice, sendCommand, disconnect } = useTVConnection();
   const [isMuted, setIsMuted] = useState(false);
+
+  const handleCommand = async (command: string) => {
+    if (status !== 'connected') {
+      toast({
+        title: "Not Connected",
+        description: "Connect to a TV to use the remote",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Handle mute toggle locally
+    if (command === 'mute') {
+      setIsMuted(!isMuted);
+    }
+    
+    // Send command to TV
+    const success = await sendCommand(command as any);
+    if (!success) {
+      toast({
+        title: "Command Failed",
+        description: `Could not send ${command} command`,
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen ios-gradient px-4 py-8">
@@ -31,11 +59,25 @@ const Index = () => {
       {/* App Icon */}
       <AppIcon />
 
-      {/* Device Selector */}
-      <DeviceSelector 
-        currentDevice={currentDevice} 
-        setCurrentDevice={setCurrentDevice}
-      />
+      {/* Connection Status */}
+      <div 
+        className="flex items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-gray-100"
+        onClick={() => navigate("/devices")}
+      >
+        <span className="text-sm font-medium text-gray-500">Current Device</span>
+        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600">
+          <div className={`w-2 h-2 rounded-full ${
+            status === 'connected' ? 'bg-green-500' : 
+            status === 'connecting' ? 'bg-yellow-500' : 
+            status === 'error' ? 'bg-red-500' : 'bg-gray-400'
+          }`}></div>
+          <span className="font-medium text-sm">
+            {status === 'connected' ? connectedDevice?.name || 'Unknown TV' : 
+             status === 'connecting' ? 'Connecting...' : 
+             status === 'error' ? 'Connection Error' : 'Not Connected'}
+          </span>
+        </div>
+      </div>
 
       {/* Remote Control */}
       <Card className="mt-6 p-6 mx-auto max-w-xs shadow-md bg-white rounded-3xl">
@@ -47,7 +89,7 @@ const Index = () => {
               variant="primary" 
               size="lg" 
               className="bg-red-500 hover:bg-red-600"
-              onClick={() => console.log("Power")}
+              onClick={() => handleCommand('power')}
             >
               <Power className="h-6 w-6" />
             </IOSButton>
@@ -59,16 +101,16 @@ const Index = () => {
             <div className="space-y-4">
               <IOSButton 
                 variant="secondary" 
-                onClick={() => setIsMuted(!isMuted)}
+                onClick={() => handleCommand('mute')}
               >
                 {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
               </IOSButton>
               <div className="flex flex-col gap-2 items-center">
-                <IOSButton onClick={() => console.log("Volume Up")}>
+                <IOSButton onClick={() => handleCommand('volumeUp')}>
                   <ChevronUp className="h-5 w-5" />
                 </IOSButton>
                 <span className="text-xs text-gray-500 font-medium">VOL</span>
-                <IOSButton onClick={() => console.log("Volume Down")}>
+                <IOSButton onClick={() => handleCommand('volumeDown')}>
                   <ChevronDown className="h-5 w-5" />
                 </IOSButton>
               </div>
@@ -77,16 +119,16 @@ const Index = () => {
             <div className="space-y-4">
               <IOSButton 
                 variant="secondary"
-                onClick={() => console.log("Source")}
+                onClick={() => navigate("/devices")}
               >
                 <Tv className="h-5 w-5" />
               </IOSButton>
               <div className="flex flex-col gap-2 items-center">
-                <IOSButton onClick={() => console.log("Channel Up")}>
+                <IOSButton onClick={() => handleCommand('channelUp')}>
                   <ChevronUp className="h-5 w-5" />
                 </IOSButton>
                 <span className="text-xs text-gray-500 font-medium">CH</span>
-                <IOSButton onClick={() => console.log("Channel Down")}>
+                <IOSButton onClick={() => handleCommand('channelDown')}>
                   <ChevronDown className="h-5 w-5" />
                 </IOSButton>
               </div>
@@ -95,38 +137,38 @@ const Index = () => {
 
           {/* Navigation Controls */}
           <div className="flex flex-col items-center gap-3">
-            <IOSButton variant="secondary" onClick={() => console.log("Up")}>
+            <IOSButton variant="secondary" onClick={() => handleCommand('up')}>
               <ChevronUp className="h-5 w-5" />
             </IOSButton>
             <div className="flex items-center gap-3">
-              <IOSButton variant="secondary" onClick={() => console.log("Left")}>
+              <IOSButton variant="secondary" onClick={() => handleCommand('left')}>
                 <ChevronLeft className="h-5 w-5" />
               </IOSButton>
               <IOSButton 
                 variant="primary"
                 size="md"
-                onClick={() => console.log("OK")}
+                onClick={() => handleCommand('ok')}
               >
                 <div className="h-3 w-3 bg-white rounded-full"></div>
               </IOSButton>
-              <IOSButton variant="secondary" onClick={() => console.log("Right")}>
+              <IOSButton variant="secondary" onClick={() => handleCommand('right')}>
                 <ChevronRight className="h-5 w-5" />
               </IOSButton>
             </div>
-            <IOSButton variant="secondary" onClick={() => console.log("Down")}>
+            <IOSButton variant="secondary" onClick={() => handleCommand('down')}>
               <ChevronDown className="h-5 w-5" />
             </IOSButton>
           </div>
 
           {/* Menu Controls */}
           <div className="flex justify-between">
-            <IOSButton variant="secondary" onClick={() => console.log("Home")}>
+            <IOSButton variant="secondary" onClick={() => handleCommand('home')}>
               <Home className="h-5 w-5" />
             </IOSButton>
-            <IOSButton variant="secondary" onClick={() => console.log("Menu")}>
+            <IOSButton variant="secondary" onClick={() => handleCommand('menu')}>
               <Menu className="h-5 w-5" />
             </IOSButton>
-            <IOSButton variant="secondary" onClick={() => console.log("Back")}>
+            <IOSButton variant="secondary" onClick={() => handleCommand('back')}>
               <ArrowLeft className="h-5 w-5" />
             </IOSButton>
           </div>
@@ -177,11 +219,15 @@ const Index = () => {
       </Card>
 
       <p className="text-center text-gray-500 text-xs mt-8 font-medium">
-        Point at your TV and tap buttons to control
+        {status === 'connected' 
+          ? 'Connected and ready to use' 
+          : 'Connect to a TV device to use the remote'}
       </p>
-      <p className="text-center text-blue-500 text-xs mt-1 font-medium">
-        Make sure you're within range of your device
-      </p>
+      {status === 'connected' && (
+        <p className="text-center text-blue-500 text-xs mt-1 font-medium">
+          Signal strength: Good
+        </p>
+      )}
     </div>
   );
 };
