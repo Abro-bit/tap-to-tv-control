@@ -1,8 +1,7 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Tv, Power, VolumeX, Volume2, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Home, Menu, Settings, ArrowLeft } from "lucide-react";
+import { Tv, Power, VolumeX, Volume2, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Home, Menu, Settings, ArrowLeft, Youtube } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import RemoteButton from "@/components/RemoteButton";
 import DeviceSelector from "@/components/DeviceSelector";
@@ -155,6 +154,24 @@ const Index = () => {
                 0
               </IOSButton>
             </div>
+          </div>
+
+          {/* Streaming Service Buttons */}
+          <div className="flex justify-between items-center">
+            <IOSButton 
+              variant="default"
+              className="bg-[#E50914] text-white" // Netflix red
+              onClick={() => console.log("Netflix")}
+            >
+              <span className="text-xs font-bold">Netflix</span>
+            </IOSButton>
+            <IOSButton 
+              variant="default"
+              className="bg-[#FF9900] text-white" // Amazon Prime orange
+              onClick={() => console.log("Amazon Prime")}
+            >
+              <span className="text-xs font-bold">Prime</span>
+            </IOSButton>
           </div>
         </div>
       </Card>
