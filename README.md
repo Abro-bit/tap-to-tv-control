@@ -71,3 +71,31 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## iOS Deployment Reminder
+
+### Pre-requisites:
+- Mac computer with Xcode installed
+- Apple Developer Account
+- Project transferred to your GitHub repository
+
+### Deployment Steps:
+1. Git pull the project from your GitHub repository
+2. Run `npm install`
+3. Add iOS platform: `npx cap add ios`
+4. Sync project: `npx cap sync`
+5. Open in Xcode: `npx cap open ios`
+6. Configure signing in Xcode using your Apple Developer account
+7. Build and deploy to iOS device or simulator
+
+### Additional Notes:
+- Requires a Mac with Xcode
+- Ensure you have an active Apple Developer account
+- Recommended to read our mobile development guide: https://lovable.dev/blogs/TODO
+
+Deployment Checklist:
+- [ ] Transferred project to GitHub
+- [ ] Installed dependencies
+- [ ] Added iOS platform
+- [ ] Configured Apple Developer Account
+- [ ] Ready to build in Xcode
