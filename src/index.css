@@ -99,3 +99,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.ios-gradient {
+  background: linear-gradient(180deg, #f0f4f8 0%, #e6eef5 100%);
+}
