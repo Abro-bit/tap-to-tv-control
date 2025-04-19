@@ -20,7 +20,7 @@ export const iOSHelper = {
     connected: boolean;
     connectionType: string;
     isWifi: boolean;
-  }> {
+  }> => {
     try {
       const status = await Network.getStatus();
       return {
@@ -41,7 +41,7 @@ export const iOSHelper = {
   /**
    * Checks if the device has WiFi enabled, which is required for TV discovery
    */
-  hasWifiForTVDiscovery: async (): Promise<boolean> {
+  hasWifiForTVDiscovery: async (): Promise<boolean> => {
     const networkInfo = await iOSHelper.getNetworkInfo();
     return networkInfo.connected && networkInfo.isWifi;
   }
