@@ -88,14 +88,39 @@ class TVConnectionService extends BaseConnectionService {
     this.updateStatus('connecting');
     console.log(`Connecting to ${device.name} at ${device.ipAddress}...`);
 
-    return new Promise<boolean>((resolve) => {
-      setTimeout(() => {
-        this._connectedDevice = device;
-        this.updateStatus('connected');
-        console.log(`Connected to ${device.name}`);
-        resolve(true);
-      }, 1500);
-    });
+    // Generate a mock pairing code that would normally come from the TV
+    const mockPairingCode = Math.floor(1000 + Math.random() * 9000).toString();
+    console.log(`Pairing code displayed on TV: ${mockPairingCode}`);
+
+    // Store the code temporarily (in a real implementation, this would be handled differently)
+    this._currentPairingCode = mockPairingCode;
+    this._deviceAwaitingPairing = device;
+
+    return true;
+  }
+
+  public async verifyPairingCode(code: string): Promise<boolean> {
+    if (!this._deviceAwaitingPairing || !this._currentPairingCode) {
+      console.error('No device is awaiting pairing');
+      return false;
+    }
+
+    if (code !== this._currentPairingCode) {
+      console.error('Invalid pairing code');
+      this.updateStatus('disconnected');
+      return false;
+    }
+
+    // Successful pairing
+    this._connectedDevice = this._deviceAwaitingPairing;
+    this.updateStatus('connected');
+    console.log(`Successfully paired with ${this._connectedDevice.name}`);
+
+    // Clear temporary pairing data
+    this._currentPairingCode = null;
+    this._deviceAwaitingPairing = null;
+
+    return true;
   }
 
   public async disconnect(): Promise<void> {
