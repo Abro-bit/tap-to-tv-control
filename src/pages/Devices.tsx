@@ -5,6 +5,7 @@ import { ArrowLeft, RefreshCw, Tv } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTVConnection } from "@/hooks/useTVConnection";
 import { useToast } from "@/hooks/use-toast";
+import TVPairingDialog from "@/components/TVPairingDialog";
 
 const Devices = () => {
   const navigate = useNavigate();
@@ -15,25 +16,34 @@ const Devices = () => {
     startScan, 
     connectToDevice,
     connectedDevice,
-    status
+    status,
+    showPairingDialog,
+    pairingDeviceId,
+    verifyPairingCode
   } = useTVConnection();
 
-  const handleConnectDevice = async (deviceId: string) => {
-    const success = await connectToDevice(deviceId);
+  const handleConnectDevice = (deviceId: string) => {
+    connectToDevice(deviceId);
+  };
+
+  const handlePairingSubmit = async (code: string) => {
+    const success = await verifyPairingCode(code);
     if (success) {
       toast({
         title: "Connected",
-        description: "Successfully connected to TV",
+        description: "Successfully paired with TV",
       });
       navigate('/');
     } else {
       toast({
-        title: "Connection Failed",
-        description: "Could not connect to the TV",
+        title: "Pairing Failed",
+        description: "Invalid pairing code",
         variant: "destructive",
       });
     }
   };
+
+  const deviceToConnect = pairingDeviceId ? devices.find(d => d.id === pairingDeviceId) : null;
 
   return (
     <div className="min-h-screen ios-gradient px-4 py-8">
@@ -128,6 +138,16 @@ const Devices = () => {
           Make sure your TV and phone are on the same WiFi network
         </p>
       </div>
+
+      {/* TV Pairing Dialog */}
+      {deviceToConnect && (
+        <TVPairingDialog
+          isOpen={showPairingDialog}
+          onClose={() => {}}
+          onSubmit={handlePairingSubmit}
+          deviceName={deviceToConnect.name}
+        />
+      )}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import { Network } from '@capacitor/network';
 import { TVDevice, ConnectionStatus, TVProtocol } from '../types/tv';
 import { TV_PROTOCOLS } from '../constants/tvProtocols';
@@ -6,6 +7,8 @@ import { BaseConnectionService } from './base/BaseConnectionService';
 class TVConnectionService extends BaseConnectionService {
   private static instance: TVConnectionService;
   private _isScanning = false;
+  private _currentPairingCode: string | null = null;
+  private _deviceAwaitingPairing: TVDevice | null = null;
 
   private constructor() {
     super();
