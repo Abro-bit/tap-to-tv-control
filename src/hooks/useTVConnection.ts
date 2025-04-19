@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { TVConnection, ConnectionStatus, TVDevice } from '../services/tvConnection';
+import { TVConnection } from '../services/tvConnection';
+import { ConnectionStatus, TVDevice } from '../types/tv';
 
 export function useTVConnection() {
   const [status, setStatus] = useState<ConnectionStatus>(TVConnection.status);

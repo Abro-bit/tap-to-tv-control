@@ -1,6 +1,5 @@
-
 import { Network } from '@capacitor/network';
-import { TVDevice, ConnectionStatus } from '../types/tv';
+import { TVDevice, ConnectionStatus, TVProtocol } from '../types/tv';
 import { TV_PROTOCOLS } from '../constants/tvProtocols';
 import { BaseConnectionService } from './base/BaseConnectionService';
 
@@ -114,7 +113,7 @@ class TVConnectionService extends BaseConnectionService {
     }
 
     const command = this._connectedDevice.protocol.commands[commandType];
-    console.log(`Sending command ${commandType} (${command}) to ${this._connectedDevice.name}`);
+    console.log(`Sending command ${String(commandType)} (${command}) to ${this._connectedDevice.name}`);
     
     return true;
   }
