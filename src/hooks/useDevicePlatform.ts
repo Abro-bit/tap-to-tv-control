@@ -25,13 +25,18 @@ export function useDevicePlatform() {
     });
 
     // Listen for network changes
-    const networkListener = Network.addListener('networkStatusChange', status => {
+    let networkListener: any = null;
+    Network.addListener('networkStatusChange', status => {
       setIsConnected(status.connected);
       setConnectionType(status.connectionType);
+    }).then(listener => {
+      networkListener = listener;
     });
 
     return () => {
-      networkListener.remove();
+      if (networkListener) {
+        networkListener.remove();
+      }
     };
   }, []);
 
