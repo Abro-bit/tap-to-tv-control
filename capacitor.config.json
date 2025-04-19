@@ -10,13 +10,13 @@
     "SplashScreen": {
       "launchShowDuration": 3000,
       "launchAutoHide": true,
-      "backgroundColor": "#ffffffff",
+      "backgroundColor": "#ffffff",
       "androidSplashResourceName": "splash",
       "androidScaleType": "CENTER_CROP",
       "showSpinner": true,
       "androidSpinnerStyle": "large",
       "iosSpinnerStyle": "small",
-      "spinnerColor": "#999999",
+      "spinnerColor": "#3880ff",
       "splashFullScreen": true,
       "splashImmersive": true,
       "layoutName": "launch_screen",
@@ -25,5 +25,11 @@
     "Network": {
       "networkStatusIndicator": true
     }
+  },
+  "ios": {
+    "contentInset": "always",
+    "allowsLinkPreview": false,
+    "scrollEnabled": true,
+    "backgroundColor": "#ffffff"
   }
 }
