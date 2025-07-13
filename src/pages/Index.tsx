@@ -136,28 +136,51 @@ const Index = () => {
           </div>
 
           {/* Navigation Controls */}
-          <div className="flex flex-col items-center gap-3">
-            <IOSButton variant="secondary" onClick={() => handleCommand('up')}>
+          <div className="relative flex items-center justify-center w-48 h-48 mx-auto">
+            {/* Directional Segments */}
+            {/* Up segment */}
+            <button 
+              onClick={() => handleCommand('up')}
+              className="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white rounded-t-full flex items-end justify-center pb-3 transition-colors"
+              style={{ clipPath: 'polygon(25% 100%, 75% 100%, 100% 0%, 0% 0%)' }}
+            >
               <ChevronUp className="h-5 w-5" />
-            </IOSButton>
-            <div className="flex items-center gap-3">
-              <IOSButton variant="secondary" onClick={() => handleCommand('left')}>
-                <ChevronLeft className="h-5 w-5" />
-              </IOSButton>
-              <IOSButton 
-                variant="primary"
-                size="md"
-                onClick={() => handleCommand('ok')}
-              >
-                <div className="h-3 w-3 bg-white rounded-full"></div>
-              </IOSButton>
-              <IOSButton variant="secondary" onClick={() => handleCommand('right')}>
-                <ChevronRight className="h-5 w-5" />
-              </IOSButton>
-            </div>
-            <IOSButton variant="secondary" onClick={() => handleCommand('down')}>
+            </button>
+            
+            {/* Right segment */}
+            <button 
+              onClick={() => handleCommand('right')}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white rounded-r-full flex items-center justify-start pl-3 transition-colors"
+              style={{ clipPath: 'polygon(0% 25%, 100% 0%, 100% 100%, 0% 75%)' }}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+            
+            {/* Down segment */}
+            <button 
+              onClick={() => handleCommand('down')}
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white rounded-b-full flex items-start justify-center pt-3 transition-colors"
+              style={{ clipPath: 'polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%)' }}
+            >
               <ChevronDown className="h-5 w-5" />
-            </IOSButton>
+            </button>
+            
+            {/* Left segment */}
+            <button 
+              onClick={() => handleCommand('left')}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white rounded-l-full flex items-center justify-end pr-3 transition-colors"
+              style={{ clipPath: 'polygon(100% 25%, 100% 75%, 0% 100%, 0% 0%)' }}
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            
+            {/* Center OK button */}
+            <button 
+              onClick={() => handleCommand('ok')}
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold transition-colors"
+            >
+              OK
+            </button>
           </div>
 
           {/* Menu Controls */}
