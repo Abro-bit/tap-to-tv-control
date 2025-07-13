@@ -137,61 +137,61 @@ const Index = () => {
 
           {/* Navigation Controls */}
           <div className="relative flex items-center justify-center w-48 h-48 mx-auto">
-            {/* Up wedge */}
+            {/* Up segment */}
             <button 
               onClick={() => handleCommand('up')}
-              className="absolute w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+              className="absolute w-16 h-16 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors overflow-hidden"
               style={{
-                top: '10px',
+                top: '16px',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                clipPath: 'polygon(50% 90%, 20% 10%, 80% 10%)',
-                borderRadius: '50% 50% 0 0'
+                borderRadius: '32px 32px 8px 8px',
+                clipPath: 'ellipse(100% 60% at 50% 100%)'
               }}
             >
               <ChevronUp className="h-5 w-5" />
             </button>
             
-            {/* Right wedge */}
+            {/* Right segment */}
             <button 
               onClick={() => handleCommand('right')}
-              className="absolute w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+              className="absolute w-16 h-16 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors overflow-hidden"
               style={{
                 top: '50%',
-                right: '10px',
+                right: '16px',
                 transform: 'translateY(-50%)',
-                clipPath: 'polygon(10% 50%, 90% 20%, 90% 80%)',
-                borderRadius: '0 50% 50% 0'
+                borderRadius: '8px 32px 32px 8px',
+                clipPath: 'ellipse(60% 100% at 0% 50%)'
               }}
             >
               <ChevronRight className="h-5 w-5" />
             </button>
             
-            {/* Down wedge */}
+            {/* Down segment */}
             <button 
               onClick={() => handleCommand('down')}
-              className="absolute w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+              className="absolute w-16 h-16 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors overflow-hidden"
               style={{
-                bottom: '10px',
+                bottom: '16px',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                clipPath: 'polygon(50% 10%, 20% 90%, 80% 90%)',
-                borderRadius: '0 0 50% 50%'
+                borderRadius: '8px 8px 32px 32px',
+                clipPath: 'ellipse(100% 60% at 50% 0%)'
               }}
             >
               <ChevronDown className="h-5 w-5" />
             </button>
             
-            {/* Left wedge */}
+            {/* Left segment */}
             <button 
               onClick={() => handleCommand('left')}
-              className="absolute w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+              className="absolute w-16 h-16 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors overflow-hidden"
               style={{
                 top: '50%',
-                left: '10px',
+                left: '16px',
                 transform: 'translateY(-50%)',
-                clipPath: 'polygon(90% 50%, 10% 20%, 10% 80%)',
-                borderRadius: '50% 0 0 50%'
+                borderRadius: '32px 8px 8px 32px',
+                clipPath: 'ellipse(60% 100% at 100% 50%)'
               }}
             >
               <ChevronLeft className="h-5 w-5" />
