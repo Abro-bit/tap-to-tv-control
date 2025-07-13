@@ -162,14 +162,14 @@ const Index = () => {
 
           {/* Menu Controls */}
           <div className="flex justify-between">
+            <IOSButton variant="secondary" onClick={() => handleCommand('back')}>
+              <ArrowLeft className="h-5 w-5" />
+            </IOSButton>
             <IOSButton variant="secondary" onClick={() => handleCommand('home')}>
               <Home className="h-5 w-5" />
             </IOSButton>
             <IOSButton variant="secondary" onClick={() => handleCommand('menu')}>
               <Menu className="h-5 w-5" />
-            </IOSButton>
-            <IOSButton variant="secondary" onClick={() => handleCommand('back')}>
-              <ArrowLeft className="h-5 w-5" />
             </IOSButton>
           </div>
 
