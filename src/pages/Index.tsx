@@ -136,35 +136,63 @@ const Index = () => {
           </div>
 
           {/* Navigation Controls */}
-          <div className="relative flex items-center justify-center w-40 h-40 mx-auto">
-            {/* Up button */}
+          <div className="relative flex items-center justify-center w-48 h-48 mx-auto">
+            {/* Up wedge */}
             <button 
               onClick={() => handleCommand('up')}
-              className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors"
+              className="absolute w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+              style={{
+                top: '10px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                clipPath: 'polygon(50% 90%, 20% 10%, 80% 10%)',
+                borderRadius: '50% 50% 0 0'
+              }}
             >
               <ChevronUp className="h-5 w-5" />
             </button>
             
-            {/* Right button */}
+            {/* Right wedge */}
             <button 
               onClick={() => handleCommand('right')}
-              className="absolute right-0 top-1/2 transform translate-x-2 -translate-y-1/2 w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors"
+              className="absolute w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+              style={{
+                top: '50%',
+                right: '10px',
+                transform: 'translateY(-50%)',
+                clipPath: 'polygon(10% 50%, 90% 20%, 90% 80%)',
+                borderRadius: '0 50% 50% 0'
+              }}
             >
               <ChevronRight className="h-5 w-5" />
             </button>
             
-            {/* Down button */}
+            {/* Down wedge */}
             <button 
               onClick={() => handleCommand('down')}
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2 w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors"
+              className="absolute w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+              style={{
+                bottom: '10px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                clipPath: 'polygon(50% 10%, 20% 90%, 80% 90%)',
+                borderRadius: '0 0 50% 50%'
+              }}
             >
               <ChevronDown className="h-5 w-5" />
             </button>
             
-            {/* Left button */}
+            {/* Left wedge */}
             <button 
               onClick={() => handleCommand('left')}
-              className="absolute left-0 top-1/2 transform -translate-x-2 -translate-y-1/2 w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors"
+              className="absolute w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+              style={{
+                top: '50%',
+                left: '10px',
+                transform: 'translateY(-50%)',
+                clipPath: 'polygon(90% 50%, 10% 20%, 10% 80%)',
+                borderRadius: '50% 0 0 50%'
+              }}
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -172,7 +200,7 @@ const Index = () => {
             {/* Center OK button */}
             <button 
               onClick={() => handleCommand('ok')}
-              className="w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold transition-colors"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold transition-colors z-10"
             >
               OK
             </button>
