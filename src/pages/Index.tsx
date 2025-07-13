@@ -202,14 +202,14 @@ const Index = () => {
           <div className="flex justify-between items-center">
             <IOSButton 
               variant="default"
-              className="bg-[#E50914] text-white px-4 py-2" // Netflix red
+              className="bg-[#E50914] text-white px-4 py-2 rounded-none" // Netflix red
               onClick={() => console.log("Netflix")}
             >
               <span className="text-sm font-bold">Netflix</span>
             </IOSButton>
             <IOSButton 
               variant="default"
-              className="bg-[#FF9900] text-white px-4 py-2" // Amazon Prime orange
+              className="bg-[#FF9900] text-white px-4 py-2 rounded-none" // Amazon Prime orange
               onClick={() => console.log("Amazon Prime")}
             >
               <span className="text-sm font-bold">Prime</span>
