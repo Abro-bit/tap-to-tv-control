@@ -136,40 +136,35 @@ const Index = () => {
           </div>
 
           {/* Navigation Controls */}
-          <div className="relative flex items-center justify-center w-48 h-48 mx-auto">
-            {/* Directional Segments */}
-            {/* Up segment */}
+          <div className="relative flex items-center justify-center w-40 h-40 mx-auto">
+            {/* Up button */}
             <button 
               onClick={() => handleCommand('up')}
-              className="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white rounded-t-full flex items-end justify-center pb-3 transition-colors"
-              style={{ clipPath: 'polygon(25% 100%, 75% 100%, 100% 0%, 0% 0%)' }}
+              className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors"
             >
               <ChevronUp className="h-5 w-5" />
             </button>
             
-            {/* Right segment */}
+            {/* Right button */}
             <button 
               onClick={() => handleCommand('right')}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white rounded-r-full flex items-center justify-start pl-3 transition-colors"
-              style={{ clipPath: 'polygon(0% 25%, 100% 0%, 100% 100%, 0% 75%)' }}
+              className="absolute right-0 top-1/2 transform translate-x-2 -translate-y-1/2 w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
             
-            {/* Down segment */}
+            {/* Down button */}
             <button 
               onClick={() => handleCommand('down')}
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white rounded-b-full flex items-start justify-center pt-3 transition-colors"
-              style={{ clipPath: 'polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%)' }}
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2 w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors"
             >
               <ChevronDown className="h-5 w-5" />
             </button>
             
-            {/* Left segment */}
+            {/* Left button */}
             <button 
               onClick={() => handleCommand('left')}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 w-20 h-20 bg-blue-500 hover:bg-blue-600 text-white rounded-l-full flex items-center justify-end pr-3 transition-colors"
-              style={{ clipPath: 'polygon(100% 25%, 100% 75%, 0% 100%, 0% 0%)' }}
+              className="absolute left-0 top-1/2 transform -translate-x-2 -translate-y-1/2 w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -177,7 +172,7 @@ const Index = () => {
             {/* Center OK button */}
             <button 
               onClick={() => handleCommand('ok')}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold transition-colors"
+              className="w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold transition-colors"
             >
               OK
             </button>
